@@ -19,49 +19,54 @@ int _printf(const char *format, ...)
 		if (format[j] == '%')
 		{
 		j++;
-		length++;
 			switch (format[j])
 			{
                 		case 'c':
                 		{
 					char x = va_arg(args, int);
 					_putchar(x);
+					length++;
 					break;
 				}
 				case 's':
 				{
 					char *x = va_arg(args, char*);
 					write(1, x, _strlen(x) * sizeof(char));
+					length += _strlen(x) - 1;
 					break;
 				}
 				case 'i':
 				{
 					int x = va_arg(args, int);
 					print_number(x);
+					length++;
 					break;
 				}
 				case 'd':
 				{
 					int x = va_arg(args, int);
 					print_number(x);
+					length++;
 					break;
 				}
 				case '%':
 				{
 					_putchar('%');
+					length++;
 					break;
 				}
 				default:
 				{
 					_putchar('%');
 					_putchar(format[j]);
+					length += 2;
 					break;
 				}
 			}
 		}
 		else
 		{
-			write(1, &format[j], 1);
+			_putchar(format[j]);
 			length++;
 		}
 		j++;
