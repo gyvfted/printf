@@ -2,8 +2,9 @@
 /**
  * _puts - prints a string, followed by a new line
  * @str:the string
+ * Return:size of string
  */
-void _puts(char *str)
+int _puts(char *str)
 {
 	int size;
 
@@ -11,5 +12,5 @@ void _puts(char *str)
 	{
 		_putchar(*(str - 1));
 	}
-	_putchar('\n');
+	return (size);
 }
