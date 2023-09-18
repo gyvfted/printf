@@ -6,12 +6,11 @@
  */
 int _puts(char *str)
 {
-	int size = 0;
+	int size;
 
 	if (str == NULL)
 		str = "(null)";
-	while (str[size] != '\0')
-		size++;
-
+	for (size = 0; str[size] != '\0'; size++)
+		;
 	return (write(1, str, size));
 }
