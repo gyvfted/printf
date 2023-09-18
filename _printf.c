@@ -63,11 +63,13 @@ int _printf(const char *format, ...)
 	if (!format)
 		return (-1);
 
-	while (format[j])
+	while (format[j] != '\0')
 	{
 		if (format[j] == '%')
 		{
 		j++;
+		if (format[j] == '\0')
+			break;
 		switch_printf(format[j], &length, args);
 		}
 		else
