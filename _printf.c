@@ -43,7 +43,7 @@ void switch_printf(char p, int *length, va_list args)
 		{
 		_putchar('%');
 		_putchar(p);
-		*length += 2;
+		length += 2;
 		break;
 		}
 	}
@@ -63,11 +63,13 @@ int _printf(const char *format, ...)
 	if (!format)
 		return (-1);
 
-	while (format[j])
+	while (format[j] != '\0')
 	{
 		if (format[j] == '%')
 		{
 		j++;
+		if (format[j] == '\0')
+			break;
 		switch_printf(format[j], &length, args);
 		}
 		else
