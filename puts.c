@@ -9,7 +9,7 @@ int _puts(char *str)
 	int size, i, length = 0;
 
 	if (str == NULL)
-		str = "(null)";
+		return (0);
 
 	size = _strlen(str);
 
