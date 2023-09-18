@@ -4,15 +4,17 @@
 * @str:the string
 * Return:size of string
 */
-int _puts(const char *str)
+int _puts(char *str)
 {
-	int size = 0;
+	int size, i, length = 0;
 
 	if (str == NULL)
-	str = "(null)";
+		str = "(null)";
 
-	while (str[size] != '\0')
-		size++;
+	size = _strlen(str);
 
-	return (write(1, str, size));
+	for (i = 0; i < size; i++)
+		length += _putchar(str[i]);
+
+	return (length);
 }
