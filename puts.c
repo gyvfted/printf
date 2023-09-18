@@ -10,7 +10,8 @@ int _puts(char *str)
 
 	if (str == NULL)
 		str = "(null)";
+	while (str[size] != '\0')
+		size++;
 
-	size = _strlen(str);
 	return (write(1, str, size));
 }
