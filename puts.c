@@ -11,8 +11,8 @@ int _puts(char *str)
 	if (str == NULL)
 		str = "(null)";
 
-	for (i = 0; *str++; i++)
-		length += _putchar(str[i]);
+	while (str[i] != '\0')
+		length += _putchar(str[i++]);
 
 	return (length);
 }
