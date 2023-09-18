@@ -13,7 +13,7 @@ int _puts(char *str)
 
 	size = _strlen(str);
 
-	for (i = 0; i < size; i++)
+	for (i = 0; i <= size; i++)
 		length += _putchar(str[i]);
 
 	return (length);
