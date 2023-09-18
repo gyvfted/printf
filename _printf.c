@@ -39,13 +39,14 @@ void switch_printf(char p, int *length, va_list args)
 			*length += 1;
 			break;
 		}
-		default:
+		/**
+		  * default:
 		{
-		_putchar('%');
-		_putchar(p);
-		*length += 2;
-		break;
+	*	_putchar('%');
+	*	_putchar(p);
+	*	*length += 2;
 		}
+		*/
 	}
 }
 /**
