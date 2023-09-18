@@ -12,5 +12,6 @@ int _puts(char *str)
 		str = "(null)";
 	for (size = 0; str[size] != '\0'; size++)
 		;
-	return (write(1, str, size));
+	write(1, str, size);
+	return (size - 1);
 }
