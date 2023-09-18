@@ -6,8 +6,11 @@
  */
 int _puts(char *str)
 {
+	int size = 0;
+
 	if (str == NULL)
 		str = "(null)";
 
-	return (write(1, str, _strlen(str)));
+	size = _strlen(str);
+	return (write(1, str, size));
 }
