@@ -8,10 +8,9 @@ int _puts(char *str)
 {
 	int size, i, length = 0;
 
+	size = _strlen(str);
 	if (str == NULL)
 		str = "(null)";
-
-	size = _strlen(str);
 
 	for (i = 0; i < size; i++)
 		length += _putchar(str[i]);
