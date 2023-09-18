@@ -43,7 +43,7 @@ void switch_printf(char p, int *length, va_list args)
 		{
 		_putchar('%');
 		_putchar(p);
-		length += 1;
+		length += 2;
 		break;
 		}
 	}
