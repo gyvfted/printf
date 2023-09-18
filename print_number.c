@@ -3,6 +3,7 @@
 /**
  * print_number - prints number using putchar
  * @n:the number to be printed
+ * @j: the length pointer
  */
 void print_number(int n, int *j)
 {
