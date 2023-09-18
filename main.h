@@ -10,5 +10,6 @@ int _puts(char *str);
 void print_number(int n, int *j);
 int _putchar(char c);
 int _strlen(char *s);
+int custom_printf(const char *format, ...);
 
 #endif
