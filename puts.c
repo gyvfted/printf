@@ -6,8 +6,6 @@
  */
 int _puts(char *str)
 {
-	int size = 0;
-
 	if (str == NULL)
 		str = "(null)";
 
