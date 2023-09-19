@@ -6,13 +6,13 @@
 */
 int _puts(char *str)
 {
-	register int length;
+	int i;
+	char *str;
 
-	if (!str)
+	str = va_arg(list, char *);
+	if (str == NULL)
 		str = "(null)";
-
-	for (length = 0; length < _strlen(str); length++)
-		_putchar(str[length]);
-
-	return (_strlen(str));
+	for (i = 0; str[i] != '\0'; i++)
+		_putchar(str[i]);
+	return (i);
 }
