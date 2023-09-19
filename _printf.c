@@ -12,7 +12,6 @@ void switch_printf(char p, int *length, va_list args)
 	{
 		case 'c':
 		{
-			char x = va_arg(args, int);
 
 			*length += _putchar('i');
 			break;
