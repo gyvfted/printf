@@ -6,15 +6,13 @@
 */
 int _puts(char *str)
 {
-	int size, i, length = 0;
+	int length = 0;
 
-	if (str == NULL)
+	if (!str)
 		str = "(null)";
 
-	size = _strlen(str);
-
-	for (i = 0; i < size; i++)
-		length += _putchar(str[i]);
+	for (length = 0; str[length] != '\0'; length++)
+		_putchar(str[length]);
 
 	return (length);
 }
