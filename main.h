@@ -11,5 +11,6 @@ int _putchar(char c);
 int _puts(char *str);
 int _strlen(char *s);
 int custom_printf(const char *format, ...);
+void print_binary(unsigned int num);
 
 #endif

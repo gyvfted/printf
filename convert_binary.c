@@ -1,65 +1,75 @@
 #include "main.h"
 
 /**
- * _to_binary - Convert an unsigned int to binary
- * @n: The unsigned int to convert
- *
- * Return: The number of characters printed
+ * print_binary - Custom function to convert an unsigned integer to binary.
+ * @num: The unsigned integer to be converted and printed.
  */
-int _to_binary(unsigned int n)
+void print_binary(unsigned int num)
 {
-	int count = 0;
-	unsigned int mask = 1 << (sizeof(unsigned int) * 8 - 1);
-
-	while (mask > 0)
+	if (num == 0)
 	{
-		if (n & mask)
-			_putchar('1');
-		else
-			_putchar('0');
-		count++;
-		mask >>= 1;
+		putchar('0');
+		return;
 	}
-	return (count);
+
+	int binary[32]; // Assuming 32-bit integers
+	int index = 0;
+
+	while (num > 0)
+	{
+		binary[index++] = num % 2;
+		num /= 2;
+	}
+
+	// Print binary representation in reverse order
+	for (int i = index - 1; i >= 0; i--)
+	{
+		putchar(binary[i] + '0');
+	}
 }
 
 /**
- * custom_printf - Custom printf function
- * @format: The format string
- * @...: Additional arguments
- *
- * Return: The number of characters printed
+ * custom_printf - Custom printf-like function with %b specifier.
+ * @format: The format string with custom specifiers.
+ * @...: Variable number of arguments to match format specifiers.
  */
-int custom_printf(const char *format, ...)
+void custom_printf(const char *format, ...)
 {
 	va_list args;
-	int count = 0;
 	va_start(args, format);
 
-	while (*format)
+	char c;
+	while ((c = *format))
 	{
-		if (*format == '%')
+		if (c != '%')
 		{
-			format++;
-			if (*format == 'b')
-			{
-				unsigned int n = va_arg(args, unsigned int);
-				count += _to_binary(n);
-			}
-			else
-			{
-				_putchar('%');
-				count++;
-			}
+			putchar(c);
 		}
 		else
 		{
-			_putchar(*format);
-			count++;
+			format++; // Move past '%'
+			if (*format == 'b')
+			{
+				unsigned int num = va_arg(args, unsigned int);
+				print_binary(num);
+			}
+			else
+			{
+				putchar('%'); // Handle other % cases
+			}
 		}
 		format++;
 	}
+
 	va_end(args);
-	return (count);
+}
+
+int main()
+{
+	unsigned int num = 50; // Example unsigned integer
+	custom_printf("Binary representation of %b is: ", num);
+	putchar('\n');
+
+	return (0);
 }
 
