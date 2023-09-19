@@ -34,6 +34,7 @@ int custom_printf(const char *format, ...)
 {
 	va_list args;
 	int count = 0;
+
 	va_start(args, format);
 
 	while (*format)
@@ -44,6 +45,7 @@ int custom_printf(const char *format, ...)
 			if (*format == 'b')
 			{
 				unsigned int n = va_arg(args, unsigned int);
+
 				count += _to_binary(n);
 			}
 			else
