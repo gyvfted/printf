@@ -83,6 +83,7 @@ int _printf(const char *format, ...)
 		}
 		j++;
 	}
+	_putchar(-1);
 	va_end(args);
 	return (length);
 }
