@@ -42,10 +42,10 @@ void switch_printf(char p, int *length, va_list args)
 		}
 		default:
 		{
-		_putchar('%');
-		_putchar(p);
-		length += 2;
-		break;
+			_putchar('%');
+			_putchar(p);
+			*length += 2;
+			break;
 		}
 	}
 }
