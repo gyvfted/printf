@@ -63,13 +63,3 @@ void custom_printf(const char *format, ...)
 
 	va_end(args);
 }
-
-int main()
-{
-	unsigned int num = 50; // Example unsigned integer
-	custom_printf("Binary representation of %b is: ", num);
-	putchar('\n');
-
-	return (0);
-}
-
