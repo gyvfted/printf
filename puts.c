@@ -14,5 +14,5 @@ int _puts(char *str)
 	for (length = 0; length < _strlen(str); length++)
 		_putchar(str[length]);
 
-	return (length);
+	return (_strlen(str));
 }
