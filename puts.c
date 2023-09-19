@@ -6,7 +6,7 @@
 */
 int _puts(char *str)
 {
-	int length;
+	register int length;
 
 	if (!str)
 		str = "(null)";
