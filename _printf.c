@@ -38,7 +38,7 @@ int _printf(const char *format, ...)
 					len++;
 				}
 				write(1, str, len);
-				char_count += len;
+				char_count += len - 1;
 				}
 				else if (*format == '%')
 				{
