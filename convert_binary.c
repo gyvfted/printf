@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <stdarg.h>
 #include "main.h"
 
 /**
@@ -6,26 +8,26 @@
  */
 void print_binary(unsigned int num)
 {
-	if (num == 0)
-	{
-		putchar('0');
-		return;
-	}
+    if (num == 0)
+    {
+        putchar('0');
+        return;
+    }
 
-	int binary[32]; // Assuming 32-bit integers
-	int index = 0;
+    int binary[32]; // Assuming 32-bit integers
+    int index = 0;
 
-	while (num > 0)
-	{
-		binary[index++] = num % 2;
-		num /= 2;
-	}
+    while (num > 0)
+    {
+        binary[index++] = num % 2;
+        num /= 2;
+    }
 
-	// Print binary representation in reverse order
-	for (int i = index - 1; i >= 0; i--)
-	{
-		putchar(binary[i] + '0');
-	}
+    // Print binary representation in reverse order
+    for (int i = index - 1; i >= 0; i--)
+    {
+        putchar(binary[i] + '0');
+    }
 }
 
 /**
@@ -35,31 +37,46 @@ void print_binary(unsigned int num)
  */
 void custom_printf(const char *format, ...)
 {
-	va_list args;
-	va_start(args, format);
+    va_list args;
+    va_start(args, format);
 
-	char c;
-	while ((c = *format))
-	{
-		if (c != '%')
-		{
-			putchar(c);
-		}
-		else
-		{
-			format++; // Move past '%'
-			if (*format == 'b')
-			{
-				unsigned int num = va_arg(args, unsigned int);
-				print_binary(num);
-			}
-			else
-			{
-				putchar('%'); // Handle other % cases
-			}
-		}
-		format++;
-	}
+    char c;
+    while ((c = *format))
+    {
+        if (c != '%')
+        {
+            putchar(c);
+        }
+        else
+        {
+            format++; // Move past '%'
+            if (*format == 'b')
+            {
+                unsigned int num = va_arg(args, unsigned int);
+                print_binary(num);
+            }
+            else
+            {
+                putchar('%'); // Handle other % cases
+            }
+        }
+        format++;
+    }
 
-	va_end(args);
+    va_end(args);
 }
+
+/**
+ * main - Entry point
+ *
+ * Return: Always 0
+ */
+int main()
+{
+    unsigned int num = 50; // Example unsigned integer
+    custom_printf("Binary representation of %b is: ", num);
+    putchar('\n');
+
+    return 0;
+}
+
