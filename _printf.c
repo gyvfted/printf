@@ -1,89 +1,59 @@
 #include "main.h"
 /**
- * switch_printf - treat different params
- * @p: the param
- * @args: the vardic array
- * @length: length of string
- */
-
-void switch_printf(char p, int *length, va_list args)
-{
-	switch (p)
-	{
-		case 'c':
-		{
-			char x = va_arg(args, int);
-
-			*length += _putchar(x);
-			break;
-		}
-		case 's':
-		{
-			char *x = va_arg(args, char*);
-
-			*length += _puts(x);
-			break;
-		}
-		case 'i':
-		{
-			print_number(va_arg(args, int), length);
-			break;
-		}
-		case 'd':
-		{
-			print_number(va_arg(args, int), length);
-			break;
-		}
-		case '%':
-		{
-			_putchar('%');
-			*length += 1;
-			break;
-		}
-		default:
-		{
-		_putchar('%');
-		_putchar(p);
-		length += 2;
-		break;
-		}
-	}
-}
-/**
- * _printf - Receives the main string and all the necessary parameters to
- * print a formated string
- * @format: A string containing all the desired characters
- * Return: count of the characters printed
- */
+* _printf - Receives the main string and all the necessary parameters to
+* print a formated string
+* @format: A string containing all the desired characters
+* Return: count of the characters printed
+*/
 int _printf(const char *format, ...)
 {
-	int j = 0, length = 0;
 	va_list args;
+	int char_count = 0;
 
 	va_start(args, format);
 
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
-
-	while (format[j] != '\0')
+	while (*format)
 	{
-		if (format[j] == '%')
+		if (*format == '%')
 		{
-		j++;
-		if (format[j] == '\0')
-			break;
-		switch_printf(format[j], &length, args);
-		}
+			format++;
+			if (*format == '\0')
+			{
+				break;
+			}
+			if (*format == 'c')
+			{
+				char c = va_arg(args, int);
+
+				write(1, &c, 1);
+				char_count++;
+			}
+			else if (*format == 's') 
+			{
+				char *str = va_arg(args, char *);
+				int len = 0;
+
+				while (str[len])
+				{
+					len++;
+				}
+				write(1, str, len);
+				char_count += len;
+				}
+				else if (*format == '%')
+				{
+					write(1, "%", 1);
+					char_count++;
+				}
+			}
 		else
 		{
-			_putchar(format[j]);
-			length++;
+			write(1, format, 1);
+			char_count++;
 		}
-		j++;
+		format++;
 	}
-	va_end(args);
-	return (length);
-}
 
+	va_end(args);
+	return (char_count);
+}
