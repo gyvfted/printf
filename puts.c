@@ -11,7 +11,7 @@ int _puts(char *str)
 	if (!str)
 		str = "(null)";
 
-	for (length = 0; str[length] != '\0'; length++)
+	for (length = 0; length < _strlen(str); length++)
 		_putchar(str[length]);
 
 	return (length);
