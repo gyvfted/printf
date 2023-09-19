@@ -7,9 +7,9 @@
 int _puts(char *str)
 {
 	register int length;
-	
+
 	if (!str)
-		str = "(null)"
+		str = "(null)";
 
 	for (length = 0; str[length] != '\0'; length++)
 		_putchar(str[length]);
