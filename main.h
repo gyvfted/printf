@@ -10,7 +10,6 @@ void print_number(int n, int *j);
 int _putchar(char c);
 int _puts(char *str);
 int _strlen(char *s);
-int custom_printf(const char *format, ...);
-void print_binary(unsigned int num);
+int printf_bin(va_list val);
 
 #endif
