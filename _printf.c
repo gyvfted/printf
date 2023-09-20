@@ -1,89 +1,51 @@
 #include "main.h"
+
 /**
- * switch_printf - treat different params
- * @p: the param
- * @args: the vardic array
- * @length: length of string
- */
-
-void switch_printf(char p, int *length, va_list args)
-{
-	switch (p)
-	{
-		case 'c':
-		{
-			char x = va_arg(args, int);
-
-			*length += _putchar(x);
-			break;
-		}
-		case 's':
-		{
-			char *x = va_arg(args, char*);
-
-			*length += _puts(x);
-			break;
-		}
-		case 'i':
-		{
-			print_number(va_arg(args, int), length);
-			break;
-		}
-		case 'd':
-		{
-			print_number(va_arg(args, int), length);
-			break;
-		}
-		case '%':
-		{
-			_putchar('%');
-			*length += 1;
-			break;
-		}
-		default:
-		{
-			_putchar('%');
-			_putchar(p);
-			*length += 2;
-			break;
-		}
-	}
-}
-/**
- * _printf - Receives the main string and all the necessary parameters to
- * print a formated string
- * @format: A string containing all the desired characters
- * Return: count of the characters printed
+ * _printf - formatted output conversion and print data.
+ * @format: A string containing all chars
+ *
+ * Return: number of chars printed.
  */
 int _printf(const char *format, ...)
 {
-	int j = 0, length = 0;
-	va_list args;
+	unsigned int i = 0, len = 0, ibuf = 0;
+	va_list arguments;
+	int (*function)(va_list, char *, unsigned int);
+	char *buffer;
 
-	va_start(args, format);
-
-	if (!format || (format[0] == '%' && !format[1]))
+	va_start(arguments, format), buffer = malloc(sizeof(char) * 1024);
+	if (!format || !buffer || (format[i] == '%' && !format[i + 1]))
 		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
-
-	while (format[j] != '\0')
+	if (!format[i])
+		return (0);
+	for (i = 0; format && format[i]; i++)
 	{
-		if (format[j] == '%')
+		if (format[i] == '%')
 		{
-		j++;
-		if (format[j] == '\0')
-			break;
-		switch_printf(format[j], &length, args);
+			if (format[i + 1] == '\0')
+			{	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
+				return (-1);
+			}
+			else
+			{	function = get_print_func(format, i + 1);
+				if (function == NULL)
+				{
+					if (format[i + 1] == ' ' && !format[i + 2])
+						return (-1);
+					handl_buf(buffer, format[i], ibuf), len++, i--;
+				}
+				else
+				{
+					len += function(arguments, buffer, ibuf);
+					i += ev_print_func(format, i + 1);
+				}
+			} i++;
 		}
 		else
-		{
-			_putchar(format[j]);
-			length++;
-		}
-		j++;
+			handl_buf(buffer, format[i], ibuf), len++;
+		for (ibuf = len; ibuf > 1024; ibuf -= 1024)
+			;
 	}
-	va_end(args);
-	return (length);
+	print_buf(buffer, ibuf), free(buffer), va_end(arguments);
+	return (len);
 }
-
